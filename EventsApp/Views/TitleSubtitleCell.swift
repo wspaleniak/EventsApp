@@ -11,7 +11,9 @@ final class TitleSubtitleCell: UITableViewCell {
     private let titleLabel = UILabel()
     private let subtitleTextField = UITextField()
     private let verticalStackView = UIStackView()
+    private let constant: CGFloat = 15
     
+    // Metoda init wywołuje 3 prywatne metody utworzone poniżej
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
@@ -23,12 +25,16 @@ final class TitleSubtitleCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // Funkcja ta wywoływana jest podczas ustawiania cellki w tabeli
+    // Ustawia dane na bazie View Modelu
+    // ZAWSZE wszelkie dane do widoku przekazujemy poprzez ViewModel
     func update(with viewModel: TitleSubtitleCellViewModel) {
         titleLabel.text = viewModel.title
         subtitleTextField.text = viewModel.subtitle
         subtitleTextField.placeholder = viewModel.placeholder
     }
     
+    // Ustawienie odpowiednich cech dla elementów widoku
     private func setupViews() {
         verticalStackView.axis = .vertical
         titleLabel.font = .systemFont(ofSize: 22, weight: .medium)
@@ -39,18 +45,20 @@ final class TitleSubtitleCell: UITableViewCell {
         }
     }
     
+    // Dodanie elementów do innych elementów, etc.
     private func setupHierarchy() {
         contentView.addSubview(verticalStackView)
         verticalStackView.addArrangedSubview(titleLabel)
         verticalStackView.addArrangedSubview(subtitleTextField)
     }
     
+    // Ustawienie constraints dla Vertical Stack View
     private func setupLayout() {
         NSLayoutConstraint.activate([
-            verticalStackView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            verticalStackView.leftAnchor.constraint(equalTo: contentView.leftAnchor),
-            verticalStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            verticalStackView.rightAnchor.constraint(equalTo: contentView.rightAnchor)
+            verticalStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: constant),
+            verticalStackView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: constant),
+            verticalStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -constant),
+            verticalStackView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: constant)
         ])
     }
 }

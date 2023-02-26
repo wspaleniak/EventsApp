@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: - ViewModel zarządzający widokiem TitleSubtitleCell
 final class TitleSubtitleCellViewModel {
     
     let title: String

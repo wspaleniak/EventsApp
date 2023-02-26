@@ -7,10 +7,13 @@
 
 import UIKit
 
+// MARK: - Kontroler widoku dla AddEvent
 class AddEventViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
+    // Definicja ViewModel dla zarządzanai widokiem
+    // ZAWSZE wszelkie dane do widoku przekazujemy poprzez ViewModel
     var viewModel: AddEventViewModel?
     
     override func viewDidLoad() {
@@ -23,8 +26,16 @@ class AddEventViewController: UIViewController {
             self?.tableView.reloadData()
         }
         viewModel?.viewDidLoad()
+        
+        
+        navigationItem.title = viewModel?.title
+        navigationController?.navigationBar.prefersLargeTitles = true
+        // Wymuszenie pokazywania się dużego tytułu bez przewijania strony
+        tableView.contentInsetAdjustmentBehavior = .never
+        tableView.setContentOffset(.init(x: 0, y: -1), animated: true)
     }
     
+    // Metoda wywoływana w momencie zamykania
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
@@ -32,11 +43,16 @@ class AddEventViewController: UIViewController {
     }
 }
 
+// MARK: - Ustawienie właściwości dla Table View
 extension AddEventViewController: UITableViewDataSource {
+    // Użycie metody numberOfRows() z ViewModel
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel?.numberOfRows() ?? 0
     }
     
+    // Ustawianie cellki w zależności od typu elementu (enum Cell)
+    // Pobiera elementy z tablicy cells z ViewModel
+    // Użycie metody cell(for:) z ViewModel
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cellViewModel = viewModel?.cell(for: indexPath) else { return UITableViewCell() }
         switch cellViewModel {

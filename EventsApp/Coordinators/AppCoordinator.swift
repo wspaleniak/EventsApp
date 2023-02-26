@@ -7,11 +7,14 @@
 
 import UIKit
 
+// MARK: - Protokół dla wszytskich koordynatorów
 protocol Coordinator: AnyObject {
     var childCoordinators: [Coordinator] { get }
     func start()
 }
 
+// MARK: - Główny koordynator aplikacji
+// Odpala widok z eventami - EventList
 final class AppCoordinator: Coordinator {
     private(set) var childCoordinators: [Coordinator] = []
     private let window: UIWindow
@@ -20,6 +23,7 @@ final class AppCoordinator: Coordinator {
         self.window = window
     }
     
+    // Wywołanie w SceneDelegate
     func start() {
         let navigationController = UINavigationController()
         

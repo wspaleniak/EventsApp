@@ -22,6 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: scene)
         self.window = window
         
+        // Odpalenie głównego kooordynatora aplikacji
         self.appCoordinator = AppCoordinator(window: window)
         appCoordinator?.start()
     }

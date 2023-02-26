@@ -7,11 +7,14 @@
 
 import Foundation
 
+// MARK: ViewModel zarządzający widokiem EventList
 final class EventListViewModel {
     
     let title = "Events"
     var coordinator: EventListCoordinator?
     
+    // Metoda wywoływana podczas naciśnięcia przycisku dodawania nowego eventu
+    // Przekazuje działanie do kooordynatora
     func addEventBtnTapped() {
         coordinator?.startAddEvent()
     }
