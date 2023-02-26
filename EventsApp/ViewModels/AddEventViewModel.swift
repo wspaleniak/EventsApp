@@ -11,7 +11,6 @@ import Foundation
 final class AddEventViewModel {
     enum Cell {
         case titleSubtitle(TitleSubtitleCellViewModel)
-        case titleImage
     }
     
     let title = "Add"
@@ -21,8 +20,13 @@ final class AddEventViewModel {
     
     func viewDidLoad() {
         cells = [
-            .titleSubtitle(TitleSubtitleCellViewModel(title: "Name", subtitle: "", placeholder: "Add a name...")),
-            .titleSubtitle(TitleSubtitleCellViewModel(title: "Date", subtitle: "", placeholder: "Select a date..."))
+            .titleSubtitle(TitleSubtitleCellViewModel(title: "Name", subtitle: "", placeholder: "Add a name...", type: .text, onCellUpdate: {})),
+            .titleSubtitle(TitleSubtitleCellViewModel(title: "Date", subtitle: "", placeholder: "Select a date...", type: .date, onCellUpdate: { [weak self] in
+                self?.onUpdate()
+            })),
+            .titleSubtitle(TitleSubtitleCellViewModel(title: "Background", subtitle: "", placeholder: "", type: .image, onCellUpdate: { [weak self] in
+                self?.onUpdate()
+            }))
         ]
         onUpdate()
     }
@@ -43,5 +47,20 @@ final class AddEventViewModel {
     // Wywoływana podczas ustawiania właściwości TableView w kontrolerze
     func cell(for indexPath: IndexPath) -> Cell {
         return cells[indexPath.row]
+    }
+    
+    // Metoda wywoływana podczas kliknięcia w przycik 'Done' na kontrolerze
+    func doneBtnTapped() {
+        print("Done tapped!")
+        // extract info from cell view model and save in core data
+        // say coordinator to dismiss
+    }
+    
+    // Aktualizowanie cellki
+    func updateCell(indexPath: IndexPath, subtitle: String) {
+        switch cells[indexPath.row] {
+        case .titleSubtitle(let titleSubtitleCellViewModel):
+            titleSubtitleCellViewModel.update(subtitle: subtitle)
+        }
     }
 }
