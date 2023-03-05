@@ -36,16 +36,22 @@ final class TitleSubtitleCellViewModel {
         self.onCellUpdate = onCellUpdate
     }
     
+    // Aktualizacja subtitle
+    // Nie musimy odświeżać TableView
     func update(subtitle: String) {
         self.subtitle = subtitle
     }
     
+    // Aktualizacja daty
+    // Potrzebujemy odświeżyć TableView, aby wybrana data pojawiła się w TextField
     func update(date: Date) {
         let dateString = dateFormatter.string(from: date)
         self.subtitle = dateString
         onCellUpdate?()
     }
     
+    // Aktualizacja zdjęcia w tle
+    // Potrzebujemy odświeżyć TableView, aby wybrane zdjęcie pojawiło się w ImageView
     func update(image: UIImage) {
         self.image = image
         onCellUpdate?()

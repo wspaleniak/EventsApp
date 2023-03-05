@@ -36,6 +36,7 @@ final class AddEventViewModel {
         self.coreDataManager = coreDataManager
     }
     
+    // Metoda wywowływana podczas ładowania widoku kontrolera
     func viewDidLoad() {
         setupCells()
         onUpdate()
@@ -62,9 +63,10 @@ final class AddEventViewModel {
     // Metoda wywoływana podczas kliknięcia w przycik 'Done' na kontrolerze
     func doneBtnTapped() {
         if let name = nameCellViewModel?.subtitle,
+           name.trimmingCharacters(in: .whitespaces) != "",
            let dateString = dateCellViewModel?.subtitle,
-           let image = backgroundImageCellViewModel?.image,
-           let date = dateFormatter.date(from: dateString) {
+           let date = dateFormatter.date(from: dateString),
+           let image = backgroundImageCellViewModel?.image {
             coreDataManager.saveEvent(name: name, date: date, image: image)
         }
         coordinator?.didFinishSaveEvent()

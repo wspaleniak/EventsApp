@@ -32,6 +32,4 @@ extension ImagePickerCoordinator: UIImagePickerControllerDelegate, UINavigationC
         }
         parentCoordinator?.childDidFinish(childCoordinator: self)
     }
-    
-    
 }
