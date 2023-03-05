@@ -5,7 +5,7 @@
 //  Created by Wojciech Spaleniak on 25/02/2023.
 //
 
-import Foundation
+import UIKit
 
 // MARK: - ViewModel zarządzający widokiem TitleSubtitleCell
 final class TitleSubtitleCellViewModel {
@@ -24,9 +24,11 @@ final class TitleSubtitleCellViewModel {
         dateFormatter.dateFormat = "dd.MM.yyy"
         return dateFormatter
     }()
-    private(set) var onCellUpdate: () -> Void
+    private(set) var image: UIImage?
     
-    init(title: String, subtitle: String, placeholder: String, type: CellType, onCellUpdate: @escaping () -> Void) {
+    private(set) var onCellUpdate: (() -> Void)?
+    
+    init(title: String, subtitle: String, placeholder: String, type: CellType, onCellUpdate: (() -> Void)?) {
         self.title = title
         self.subtitle = subtitle
         self.placeholder = placeholder
@@ -41,6 +43,11 @@ final class TitleSubtitleCellViewModel {
     func update(date: Date) {
         let dateString = dateFormatter.string(from: date)
         self.subtitle = dateString
-        onCellUpdate()
+        onCellUpdate?()
+    }
+    
+    func update(image: UIImage) {
+        self.image = image
+        onCellUpdate?()
     }
 }

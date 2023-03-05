@@ -21,6 +21,8 @@
 		92987E4429A683EB0099AD11 /* EventListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92987E4329A683EB0099AD11 /* EventListViewController.swift */; };
 		92987E4729A6896C0099AD11 /* UIViewController+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92987E4629A6896C0099AD11 /* UIViewController+Ex.swift */; };
 		92987E4929A68CF80099AD11 /* UIColor+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92987E4829A68CF80099AD11 /* UIColor+Ex.swift */; };
+		92E987D229B4BC3500048367 /* ImagePickerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E987D129B4BC3500048367 /* ImagePickerCoordinator.swift */; };
+		92E987D529B4D23600048367 /* EventsCellBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E987D429B4D23600048367 /* EventsCellBuilder.swift */; };
 		92EC3FE429AA126300E0E647 /* EventListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EC3FE329AA126300E0E647 /* EventListViewModel.swift */; };
 		92EC3FE629AA160300E0E647 /* AddEventCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EC3FE529AA160300E0E647 /* AddEventCoordinator.swift */; };
 		92EC3FE829AA1CDC00E0E647 /* AddEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EC3FE729AA1CDB00E0E647 /* AddEventViewController.swift */; };
@@ -44,6 +46,8 @@
 		92987E4329A683EB0099AD11 /* EventListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListViewController.swift; sourceTree = "<group>"; };
 		92987E4629A6896C0099AD11 /* UIViewController+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ex.swift"; sourceTree = "<group>"; };
 		92987E4829A68CF80099AD11 /* UIColor+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ex.swift"; sourceTree = "<group>"; };
+		92E987D129B4BC3500048367 /* ImagePickerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerCoordinator.swift; sourceTree = "<group>"; };
+		92E987D429B4D23600048367 /* EventsCellBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsCellBuilder.swift; sourceTree = "<group>"; };
 		92EC3FE329AA126300E0E647 /* EventListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListViewModel.swift; sourceTree = "<group>"; };
 		92EC3FE529AA160300E0E647 /* AddEventCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventCoordinator.swift; sourceTree = "<group>"; };
 		92EC3FE729AA1CDB00E0E647 /* AddEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventViewController.swift; sourceTree = "<group>"; };
@@ -88,6 +92,7 @@
 		92987E2829A671310099AD11 /* EventsApp */ = {
 			isa = PBXGroup;
 			children = (
+				92E987D329B4D22600048367 /* Factory */,
 				92EC3FE229AA11F600E0E647 /* Delegates */,
 				92987E4529A689550099AD11 /* Extensions */,
 				92EC3FE129AA118C00E0E647 /* Database */,
@@ -109,6 +114,7 @@
 				92987E3E29A680260099AD11 /* AppCoordinator.swift */,
 				92987E4029A682880099AD11 /* EventListCoordinator.swift */,
 				92EC3FE529AA160300E0E647 /* AddEventCoordinator.swift */,
+				92E987D129B4BC3500048367 /* ImagePickerCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -129,6 +135,14 @@
 				92987E4829A68CF80099AD11 /* UIColor+Ex.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		92E987D329B4D22600048367 /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				92E987D429B4D23600048367 /* EventsCellBuilder.swift */,
+			);
+			path = Factory;
 			sourceTree = "<group>";
 		};
 		92EC3FE029AA117A00E0E647 /* ViewModels */ = {
@@ -241,7 +255,9 @@
 				92987E2A29A671310099AD11 /* AppDelegate.swift in Sources */,
 				923C60B229A69AD8009DFF47 /* CoreDataManager.swift in Sources */,
 				92EC3FE429AA126300E0E647 /* EventListViewModel.swift in Sources */,
+				92E987D529B4D23600048367 /* EventsCellBuilder.swift in Sources */,
 				92987E2C29A671310099AD11 /* SceneDelegate.swift in Sources */,
+				92E987D229B4BC3500048367 /* ImagePickerCoordinator.swift in Sources */,
 				9208046429AAC20F00FF8864 /* TitleSubtitleCell.swift in Sources */,
 				92EC3FE629AA160300E0E647 /* AddEventCoordinator.swift in Sources */,
 				92987E4129A682880099AD11 /* EventListCoordinator.swift in Sources */,

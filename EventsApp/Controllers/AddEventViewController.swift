@@ -39,6 +39,7 @@ class AddEventViewController: UIViewController {
     
     private func setupViews() {
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.register(TitleSubtitleCell.self, forCellReuseIdentifier: "TitleSubtitleCell")
         
         // Ustawienia dla NavigationController
@@ -54,7 +55,7 @@ class AddEventViewController: UIViewController {
 }
 
 // MARK: - Ustawienie właściwości dla Table View
-extension AddEventViewController: UITableViewDataSource {
+extension AddEventViewController: UITableViewDataSource, UITableViewDelegate {
     // Użycie metody numberOfRows() z ViewModel
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel?.numberOfRows() ?? 0
@@ -73,6 +74,12 @@ extension AddEventViewController: UITableViewDataSource {
             cell.subtitleTextField.delegate = self
             return cell
         }
+    }
+    
+    // Metoda wywoływana podczas kliknięcia w cellkę
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel?.didSelectRow(at: indexPath)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 

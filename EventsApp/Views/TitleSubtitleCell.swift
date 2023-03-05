@@ -42,6 +42,7 @@ final class TitleSubtitleCell: UITableViewCell {
         titleLabel.text = viewModel?.title
         subtitleTextField.text = viewModel?.subtitle
         subtitleTextField.placeholder = viewModel?.placeholder
+        photoImageView.image = viewModel?.image
         
         subtitleTextField.inputView = viewModel?.type == .text ? nil : datePickerView
         subtitleTextField.inputAccessoryView = viewModel?.type == .text ? nil : toolbar
