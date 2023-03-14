@@ -12,7 +12,7 @@ class AddEventViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    // Definicja ViewModel dla zarządzanai widokiem
+    // Definicja ViewModel dla zarządzania widokiem
     // ZAWSZE wszelkie dane do widoku przekazujemy poprzez ViewModel
     var viewModel: AddEventViewModel?
     

@@ -10,6 +10,10 @@ import CoreData
 
 // MARK: - Manager do zarządzania elementami bazy danych Core Data
 final class CoreDataManager {
+    
+    static let shared = CoreDataManager()
+    private init() {}
+    
     lazy var persistentContainer: NSPersistentContainer = {
         let persistentContainer = NSPersistentContainer(name: "EventsApp")
         persistentContainer.loadPersistentStores { _, error in

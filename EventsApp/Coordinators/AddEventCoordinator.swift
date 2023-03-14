@@ -28,7 +28,7 @@ final class AddEventCoordinator: Coordinator {
     func start() {
         self.modalNavigationController = UINavigationController()
         let addEventViewController = AddEventViewController.instantiate()
-        let addEventViewModel = AddEventViewModel(cellBuilder: EventsCellBuilder(), coreDataManager: CoreDataManager())
+        let addEventViewModel = AddEventViewModel(cellBuilder: EventsCellBuilder())
         addEventViewModel.coordinator = self
         addEventViewController.viewModel = addEventViewModel
         modalNavigationController?.setViewControllers([addEventViewController], animated: false)
@@ -45,6 +45,7 @@ final class AddEventCoordinator: Coordinator {
     // Kończenie widoku gdy klikniemy przycisk 'Done' na widoku AddEvent
     // Metoda wywoływana w AddEventViewModel
     func didFinishSaveEvent() {
+        parentCoordinator?.onSaveEvent()
         navigationController.dismiss(animated: true)
     }
     

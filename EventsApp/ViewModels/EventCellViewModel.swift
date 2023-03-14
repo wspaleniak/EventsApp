@@ -8,31 +8,63 @@
 import UIKit
 
 struct EventCellViewModel {
-    var yearText: String {
-        return "1 year"
+    let date = Date()
+    
+    private let imageQueue = DispatchQueue(label: "imageQueue", qos: .background)
+    
+    // przechowywanie obrazów z CoreData dla szybszego ładowania
+    private static let imageCache = NSCache<NSString, UIImage>()
+    private var cacheKey: String {
+        return event.objectID.description
     }
     
-    var monthText: String {
-        return "2 months"
+    var timeRamainingStrings: [String] {
+        guard let eventDate = event.date else { return [] }
+        var dates = date.timeRemaining(until: eventDate)?.components(separatedBy: ",") ?? []
+        let lastComponents = dates.last?.components(separatedBy: " i ") ?? []
+        dates.removeLast()
+        let timeRemaining = dates + lastComponents
+        return timeRemaining
     }
     
-    var weekText: String {
-        return "2 weeks"
+    var dateText: String? {
+        guard let eventDate = event.date else { return nil }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMM yyyy"
+        return dateFormatter.string(from: eventDate)
     }
     
-    var dayText: String {
-        return "2 days"
+    var eventName: String? {
+        return event.name
     }
     
-    var dateText: String {
-        return "25 Mar 2023"
+    // Metoda sprawdza czy dane zdjęcie jest przechowywane w imageCache
+    // Jeśli jest to pobiera image.data z imageCache
+    // Jeśli nie to pobiera klasycznie z CoreData
+    func loadImage(completion: @escaping (UIImage?) -> Void) {
+        if let image = Self.imageCache.object(forKey: cacheKey as NSString) {
+            completion(image)
+        } else {
+            // wykonujemy w tle
+            imageQueue.async {
+                guard let imageData = self.event.image,
+                      let image = UIImage(data: imageData) else {
+                    completion(nil)
+                    return
+                }
+                // dodajemy zdjęcie do imageCache
+                Self.imageCache.setObject(image, forKey: self.cacheKey as NSString)
+                // wykonujemy na głównym wątku
+                DispatchQueue.main.async {
+                    completion(image)
+                }
+            }
+        }
     }
     
-    var eventName: String {
-        return "Barbados"
-    }
+    private let event: Event
     
-    var image: UIImage {
-        return UIImage()
+    init(event: Event) {
+        self.event = event
     }
 }

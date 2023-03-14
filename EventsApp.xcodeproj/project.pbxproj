@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9208046129AAC17300FF8864 /* TitleSubtitleCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9208046029AAC17300FF8864 /* TitleSubtitleCellViewModel.swift */; };
 		9208046429AAC20F00FF8864 /* TitleSubtitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9208046329AAC20F00FF8864 /* TitleSubtitleCell.swift */; };
+		922A600029C0F864007DDCE8 /* Date+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922A5FFF29C0F864007DDCE8 /* Date+Ex.swift */; };
 		923C60B029A6994F009DFF47 /* EventsApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 923C60AE29A6994F009DFF47 /* EventsApp.xcdatamodeld */; };
 		923C60B229A69AD8009DFF47 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923C60B129A69AD8009DFF47 /* CoreDataManager.swift */; };
 		92987E2A29A671310099AD11 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92987E2929A671310099AD11 /* AppDelegate.swift */; };
@@ -35,6 +36,7 @@
 /* Begin PBXFileReference section */
 		9208046029AAC17300FF8864 /* TitleSubtitleCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleSubtitleCellViewModel.swift; sourceTree = "<group>"; };
 		9208046329AAC20F00FF8864 /* TitleSubtitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleSubtitleCell.swift; sourceTree = "<group>"; };
+		922A5FFF29C0F864007DDCE8 /* Date+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ex.swift"; sourceTree = "<group>"; };
 		923C60AF29A6994F009DFF47 /* EventsApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EventsApp.xcdatamodel; sourceTree = "<group>"; };
 		923C60B129A69AD8009DFF47 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		92987E2629A671310099AD11 /* EventsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EventsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -141,6 +143,7 @@
 				92987E4629A6896C0099AD11 /* UIViewController+Ex.swift */,
 				92987E4829A68CF80099AD11 /* UIColor+Ex.swift */,
 				92E987DA29B512C900048367 /* UIView+Ex.swift */,
+				922A5FFF29C0F864007DDCE8 /* Date+Ex.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -271,6 +274,7 @@
 				92E987D229B4BC3500048367 /* ImagePickerCoordinator.swift in Sources */,
 				9208046429AAC20F00FF8864 /* TitleSubtitleCell.swift in Sources */,
 				92EC3FE629AA160300E0E647 /* AddEventCoordinator.swift in Sources */,
+				922A600029C0F864007DDCE8 /* Date+Ex.swift in Sources */,
 				92987E4129A682880099AD11 /* EventListCoordinator.swift in Sources */,
 				92E987DB29B512C900048367 /* UIView+Ex.swift in Sources */,
 			);

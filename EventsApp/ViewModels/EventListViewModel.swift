@@ -15,15 +15,24 @@ final class EventListViewModel {
     
     let title = "Events"
     private(set) var cells: [Cell] = []
+    private let coreDataManager: CoreDataManager
     var coordinator: EventListCoordinator?
     var onUpdate: () -> Void = {}   // pozwala odświeżyć tablicę zdefiniowaną w kontrolerze
     
+    init(coreDataManager: CoreDataManager = CoreDataManager.shared) {
+        self.coreDataManager = coreDataManager
+    }
+    
     func viewDidLoad() {
-        cells = [
-            .event(EventCellViewModel()),
-            .event(EventCellViewModel()),
-            .event(EventCellViewModel())
-        ]
+        reload()
+    }
+    
+    // Wykonywanie tej funkcji przypisujemy w kooordynatorze, gdy jego dziecko skończy działanie
+    func reload() {
+        let events = coreDataManager.fetchEvents()
+        cells = events.map {
+            .event(EventCellViewModel(event: $0))
+        }
         onUpdate()
     }
     
