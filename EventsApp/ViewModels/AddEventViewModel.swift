@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK: ViewModel zarządzający widokiem AddEvent
+// MARK: - ViewModel zarządzający widokiem AddEvent
 final class AddEventViewModel {
     enum Cell {
         case titleSubtitle(TitleSubtitleCellViewModel)
@@ -15,7 +15,7 @@ final class AddEventViewModel {
     
     let title = "Add"
     private(set) var cells: [Cell] = []
-    var coordinator: AddEventCoordinator?
+    weak var coordinator: AddEventCoordinator?
     var onUpdate: () -> Void = {}   // pozwala odświeżyć tablicę zdefiniowaną w kontrolerze
     
     private var nameCellViewModel: TitleSubtitleCellViewModel?
@@ -80,7 +80,7 @@ final class AddEventViewModel {
         }
     }
     
-    // Metoda wywoływana podczas kliknięcia w cellkę na kontrolerze
+    // Metoda wywoływana podczas kliknięcia w cellkę na kontrolerze widoku
     // Posiada logikę tylko dla typu .image ponieważ ma otwierać Image Picker
     func didSelectRow(at indexPath: IndexPath) {
         switch cells[indexPath.row] {

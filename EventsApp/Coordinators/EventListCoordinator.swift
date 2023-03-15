@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 // MARK: - Koordynator dla widoku Event List
 // Z jego poziomu możemy odpalić kolejne koordynatory do innych okien aplikacji
@@ -37,8 +38,17 @@ final class EventListCoordinator: Coordinator {
         addEventCoordinator.start()
     }
     
+    // Wywołanie metody po kliknięciu w wybrane wydarzenie na EventList
+    func onSelect(id: NSManagedObjectID) {
+        let eventDetailCoordinator = EventDetailCoordinator(navigationController: navigationController, eventID: id)
+        eventDetailCoordinator.parentCoordinator = self
+        childCoordinators.append(eventDetailCoordinator)
+        eventDetailCoordinator.start()
+    }
+    
     // Usuwanie instancji widoku, gdy nie jest już używany (gdy widok zostaje zamknięty)
     func childDidFinish(childCoordinator: Coordinator) {
         childCoordinators.removeAll { $0 === childCoordinator }
     }
+    
 }

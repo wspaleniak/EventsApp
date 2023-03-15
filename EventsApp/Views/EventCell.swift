@@ -10,7 +10,7 @@ import UIKit
 final class EventCell: UITableViewCell {
     var viewModel: EventCellViewModel?
     
-    private let timeRemainigLabels = [UILabel(), UILabel(), UILabel(), UILabel()]
+    private let timeRemainigStackView = TimeRemainingStackView()
     private let dateLabel = UILabel()
     private let eventNameLabel = UILabel()
     private let backgroundImageView = UIImageView()
@@ -32,9 +32,8 @@ final class EventCell: UITableViewCell {
     // Ustawia dane na bazie View Modelu
     // ZAWSZE wszelkie dane do widoku przekazujemy poprzez ViewModel
     func update() {
-        viewModel?.timeRamainingStrings.enumerated().forEach {
-            timeRemainigLabels[$0.offset].text = $0.element
-        }
+        timeRemainigStackView.viewModel = viewModel?.timeRemainingViewModel
+        timeRemainigStackView.update()
         dateLabel.text = viewModel?.dateText
         eventNameLabel.text = viewModel?.eventName
         viewModel?.loadImage { image in
@@ -44,13 +43,10 @@ final class EventCell: UITableViewCell {
     
     // Ustawienie odpowiednich cech dla elementów widoku
     private func setupViews() {
-        (timeRemainigLabels + [dateLabel, eventNameLabel, backgroundImageView, verticalStackView]).forEach {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        }
+        timeRemainigStackView.setup()
         
-        timeRemainigLabels.forEach {
-            $0.font = .systemFont(ofSize: 28, weight: .medium)
-            $0.textColor = .white
+        [dateLabel, eventNameLabel, backgroundImageView, verticalStackView].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
         dateLabel.font = .systemFont(ofSize: 20, weight: .medium)
@@ -71,9 +67,7 @@ final class EventCell: UITableViewCell {
         contentView.addSubview(eventNameLabel)
         contentView.addSubview(verticalStackView)
         
-        timeRemainigLabels.forEach {
-            verticalStackView.addArrangedSubview($0)
-        }
+        verticalStackView.addArrangedSubview(timeRemainigStackView)
         verticalStackView.addArrangedSubview(UIView())
         verticalStackView.addArrangedSubview(dateLabel)
     }

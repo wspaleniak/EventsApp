@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK: ViewModel zarządzający widokiem EventList
+// MARK: - ViewModel zarządzający widokiem EventList
 final class EventListViewModel {
     enum Cell {
         case event(EventCellViewModel)
@@ -19,10 +19,11 @@ final class EventListViewModel {
     var coordinator: EventListCoordinator?
     var onUpdate: () -> Void = {}   // pozwala odświeżyć tablicę zdefiniowaną w kontrolerze
     
-    init(coreDataManager: CoreDataManager = CoreDataManager.shared) {
+    init(coreDataManager: CoreDataManager = .shared) {
         self.coreDataManager = coreDataManager
     }
     
+    // Metoda wywoływana podczas ładowania widoku kontrolera
     func viewDidLoad() {
         reload()
     }
@@ -31,7 +32,11 @@ final class EventListViewModel {
     func reload() {
         let events = coreDataManager.fetchEvents()
         cells = events.map {
-            .event(EventCellViewModel(event: $0))
+            var eventCellViewModel = EventCellViewModel(event: $0)
+            if let coordinator = coordinator {
+                eventCellViewModel.onSelect = coordinator.onSelect
+            }
+            return .event(eventCellViewModel)
         }
         onUpdate()
     }
@@ -52,5 +57,13 @@ final class EventListViewModel {
     // Wywoływana podczas ustawiania właściwości TableView w kontrolerze
     func cell(for indexPath: IndexPath) -> Cell {
         return cells[indexPath.row]
+    }
+    
+    // metoda wywoływana podczas kliknięcia w cellkę na kontrolerze widoku
+    func didSelectRow(at indexPath: IndexPath) {
+        switch cells[indexPath.row] {
+        case .event(let eventCellViewModel):
+            eventCellViewModel.didSelect()
+        }
     }
 }

@@ -29,6 +29,7 @@ class EventListViewController: UIViewController {
     // Ustawianie widoku wywoływane podczas jego ładowania
     private func setupViews() {
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.register(EventCell.self, forCellReuseIdentifier: "EventCell")
         
         let plusImage = UIImage(systemName: "plus.circle.fill")
@@ -46,6 +47,7 @@ class EventListViewController: UIViewController {
     }
 }
 
+// MARK: - Ustawienie właściwości dla Table View
 extension EventListViewController: UITableViewDataSource {
     // Użycie metody numberOfRows() z ViewModel
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -64,5 +66,11 @@ extension EventListViewController: UITableViewDataSource {
             cell.update()
             return cell
         }
+    }
+}
+
+extension EventListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel?.didSelectRow(at: indexPath)
     }
 }

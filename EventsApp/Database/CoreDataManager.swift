@@ -33,7 +33,9 @@ final class CoreDataManager {
         let event = Event(context: managedObjectContext)
         event.setValue(name, forKey: "name")
         event.setValue(date, forKey: "date")
-        let imageData = image.jpegData(compressionQuality: 1)
+        // zmniejszenie wielkości zapisywanego zdjęcia
+        let resizedImage = image.sameAspectRatio(newHeight: 250)
+        let imageData = resizedImage.jpegData(compressionQuality: 0.5)
         event.setValue(imageData, forKey: "image")
         
         do {
@@ -41,6 +43,15 @@ final class CoreDataManager {
         } catch {
             print(error.localizedDescription)
         }
+    }
+    
+    func getEvent(id: NSManagedObjectID) -> Event? {
+        do {
+            return try managedObjectContext.existingObject(with: id) as? Event
+        } catch {
+            print(error.localizedDescription)
+        }
+        return nil
     }
     
     // Metoda do odczytywania elementów z bazy danych
