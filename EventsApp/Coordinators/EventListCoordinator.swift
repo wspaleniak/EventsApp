@@ -10,7 +10,7 @@ import CoreData
 
 // MARK: - Koordynator dla widoku Event List
 // Z jego poziomu możemy odpalić kolejne koordynatory do innych okien aplikacji
-final class EventListCoordinator: Coordinator {
+final class EventListCoordinator: Coordinator, EventUpdatingCoordinator {
     private(set) var childCoordinators: [Coordinator] = []
     private let navigationController: UINavigationController
     

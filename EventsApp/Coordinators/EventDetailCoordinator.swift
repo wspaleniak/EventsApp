@@ -9,13 +9,14 @@ import UIKit
 import CoreData
 
 // MARK: - Koordynator dla widoku Event Detail
-final class EventDetailCoordinator: Coordinator {
+final class EventDetailCoordinator: Coordinator, EventUpdatingCoordinator {
     private(set) var childCoordinators: [Coordinator] = []
     private let navigationController: UINavigationController
     
+    var onUpdateEvent: () -> Void = {}
+    
     private let eventID: NSManagedObjectID
     var parentCoordinator: EventListCoordinator?
-    var onUpdateEvent = {}
     
     init(navigationController: UINavigationController, eventID: NSManagedObjectID) {
         self.navigationController = navigationController

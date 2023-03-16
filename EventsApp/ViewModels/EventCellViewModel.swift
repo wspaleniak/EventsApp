@@ -34,7 +34,7 @@ struct EventCellViewModel {
         )
     }
     
-    private let event: Event
+    let event: Event
     
     init(event: Event) {
         self.event = event

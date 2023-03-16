@@ -48,6 +48,9 @@ class EditEventViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneBtnTapped))
         navigationController?.navigationBar.tintColor = .black
         navigationController?.navigationBar.backgroundColor = .white
+        // Wymuszenie pokazywania się dużego tytułu bez przewijania strony
+        tableView.contentInsetAdjustmentBehavior = .never
+        tableView.setContentOffset(.init(x: 0, y: -1), animated: true)
     }
 }
 

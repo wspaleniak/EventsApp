@@ -15,7 +15,7 @@ final class AddEventCoordinator: Coordinator {
     
     // Określa kooordynator rodzica, czyli koordynator, który go wywyołał
     // Przypisywany w EventListCoordinator w metodzie startAddEvent()
-    var parentCoordinator: EventListCoordinator?
+    var parentCoordinator: (EventUpdatingCoordinator & Coordinator)?
     
     // Zdefiniowanie domknięcia dla przypisywania wybranego przez usera zdjęcia do cellki
     private var completion: (UIImage) -> Void = { _ in }

@@ -14,9 +14,20 @@ final class EventDetailViewModel {
     private let date = Date()
     private let eventID: NSManagedObjectID
     weak var coordinator: EventDetailCoordinator?
-    private let coreDataManager: CoreDataManager
+    private let eventService: EventServiceProtocol
     private var event: Event?
-    var onUpdate = {}
+    var onUpdate: () -> Void = {}
+    
+    var name: String? {
+        return event?.name
+    }
+    
+    var dateText: String? {
+        guard let eventDate = event?.date else { return nil }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMM yyyy"
+        return dateFormatter.string(from: eventDate)
+    }
     
     var image: UIImage? {
         guard let imageData = event?.image else { return nil }
@@ -36,9 +47,9 @@ final class EventDetailViewModel {
         )
     }
     
-    init(eventID: NSManagedObjectID, coreDataManager: CoreDataManager = .shared) {
+    init(eventID: NSManagedObjectID, eventService: EventServiceProtocol = EventService()) {
         self.eventID = eventID
-        self.coreDataManager = coreDataManager
+        self.eventService = eventService
     }
     
     // Metoda wywoływana podczas ładowania widoku kontrolera
@@ -53,7 +64,7 @@ final class EventDetailViewModel {
     }
     
     func reload() {
-        event = coreDataManager.getEvent(id: eventID)
+        event = eventService.getEvent(id: eventID)
         onUpdate()
     }
     

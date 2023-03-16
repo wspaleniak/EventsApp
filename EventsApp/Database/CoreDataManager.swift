@@ -28,56 +28,33 @@ final class CoreDataManager {
         return persistentContainer.viewContext
     }
     
-    // Metoda do zapisywania nowych elementów do bazy danych
-    func saveEvent(name: String, date: Date, image: UIImage) {
-        let event = Event(context: managedObjectContext)
-        event.setValue(name, forKey: "name")
-        event.setValue(date, forKey: "date")
-        // zmniejszenie wielkości zapisywanego zdjęcia
-        let resizedImage = image.sameAspectRatio(newHeight: 250)
-        let imageData = resizedImage.jpegData(compressionQuality: 0.5)
-        event.setValue(imageData, forKey: "image")
-        
+    // Metoda dla pobierania wybranego elementu z bazy danych
+    func get<T: NSManagedObject>(id: NSManagedObjectID) -> T? {
         do {
-            try managedObjectContext.save()
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
-    
-    // Metoda do aktualizowanie istniejących elementów w bazie danych
-    func updateEvent(event: Event, name: String, date: Date, image: UIImage) {
-        event.setValue(name, forKey: "name")
-        event.setValue(date, forKey: "date")
-        let resizedImage = image.sameAspectRatio(newHeight: 250)
-        let imageData = resizedImage.jpegData(compressionQuality: 0.5)
-        event.setValue(imageData, forKey: "image")
-        
-        do {
-            try managedObjectContext.save()
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
-    
-    func getEvent(id: NSManagedObjectID) -> Event? {
-        do {
-            return try managedObjectContext.existingObject(with: id) as? Event
+            return try managedObjectContext.existingObject(with: id) as? T
         } catch {
             print(error.localizedDescription)
         }
         return nil
     }
     
-    // Metoda do odczytywania elementów z bazy danych
-    func fetchEvents() -> [Event] {
+    // Metoda dla pobierania wszystkich elementów z bazy danych
+    func getAll<T: NSManagedObject>() -> [T] {
         do {
-            let fetchRequest = NSFetchRequest<Event>(entityName: "Event")
-            let events = try managedObjectContext.fetch(fetchRequest)
-            return events
+            let fetchRequest = NSFetchRequest<T>(entityName: "\(T.self)")
+            return try managedObjectContext.fetch(fetchRequest)
         } catch {
             print(error.localizedDescription)
-            return []
+        }
+        return []
+    }
+    
+    // Metoda do zapisywania elementów do bazy danych
+    func save() {
+        do {
+            try managedObjectContext.save()
+        } catch {
+            print(error.localizedDescription)
         }
     }
 }

@@ -23,6 +23,10 @@ final class ImagePickerCoordinator: NSObject, Coordinator {
         imagePickerController.delegate = self
         navigationController.present(imagePickerController, animated: true)
     }
+    
+    deinit {
+        print("Close ImagePicker")
+    }
 }
 
 // Rozszerzenie dla ImagePicker

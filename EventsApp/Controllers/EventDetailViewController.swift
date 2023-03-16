@@ -12,6 +12,8 @@ class EventDetailViewController: UIViewController {
 
     @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var timeRemainingStackView: TimeRemainingStackView!
+    @IBOutlet weak var eventNameLbl: UILabel!
+    @IBOutlet weak var eventDateLbl: UILabel!
     
     // Definicja ViewModel dla zarządzania widokiem
     // ZAWSZE wszelkie dane do widoku przekazujemy poprzez ViewModel
@@ -25,8 +27,8 @@ class EventDetailViewController: UIViewController {
             self?.setupStackView()
             self?.backgroundImageView.image = self?.viewModel?.image
             self?.timeRemainingStackView.update()
-            // event name label
-            // date label
+            self?.eventNameLbl.text = self?.viewModel?.name
+            self?.eventDateLbl.text = self?.viewModel?.dateText
         }
         viewModel?.viewDidLoad()
     }
@@ -44,6 +46,20 @@ class EventDetailViewController: UIViewController {
     }
     
     func setupViews() {
+        eventNameLbl.font = .systemFont(ofSize: 50, weight: .bold)
+        eventNameLbl.textColor = .white
+        eventNameLbl.layer.shadowColor = UIColor.black.cgColor
+        eventNameLbl.layer.shadowOpacity = 0.7
+        eventNameLbl.layer.shadowRadius = 4.0
+        eventNameLbl.layer.shadowOffset = CGSize()
+        
+        eventDateLbl.font = .systemFont(ofSize: 25, weight: .medium)
+        eventDateLbl.textColor = .white
+        eventDateLbl.layer.shadowColor = UIColor.black.cgColor
+        eventDateLbl.layer.shadowOpacity = 0.7
+        eventDateLbl.layer.shadowRadius = 4.0
+        eventDateLbl.layer.shadowOffset = CGSize()
+        
         navigationItem.rightBarButtonItem = .init(image: UIImage(systemName: "pencil"), style: .plain, target: viewModel, action: #selector(viewModel?.editButtonTapped))
     }
 }

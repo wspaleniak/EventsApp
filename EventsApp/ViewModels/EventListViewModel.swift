@@ -15,12 +15,12 @@ final class EventListViewModel {
     
     let title = "Events"
     private(set) var cells: [Cell] = []
-    private let coreDataManager: CoreDataManager
-    var coordinator: EventListCoordinator?
+    private let eventService: EventServiceProtocol
+    weak var coordinator: EventListCoordinator?
     var onUpdate: () -> Void = {}   // pozwala odświeżyć tablicę zdefiniowaną w kontrolerze
     
-    init(coreDataManager: CoreDataManager = .shared) {
-        self.coreDataManager = coreDataManager
+    init(eventService: EventServiceProtocol = EventService()) {
+        self.eventService = eventService
     }
     
     // Metoda wywoływana podczas ładowania widoku kontrolera
@@ -31,7 +31,7 @@ final class EventListViewModel {
     // Wykonywanie tej funkcji przypisujemy w kooordynatorze, gdy jego dziecko skończy działanie
     func reload() {
         EventCellViewModel.imageCache.removeAllObjects()
-        let events = coreDataManager.fetchEvents()
+        let events = eventService.getAllEvents()
         cells = events.map {
             var eventCellViewModel = EventCellViewModel(event: $0)
             if let coordinator = coordinator {
@@ -60,11 +60,20 @@ final class EventListViewModel {
         return cells[indexPath.row]
     }
     
-    // metoda wywoływana podczas kliknięcia w cellkę na kontrolerze widoku
+    // Metoda wywoływana podczas kliknięcia w cellkę na kontrolerze widoku
     func didSelectRow(at indexPath: IndexPath) {
         switch cells[indexPath.row] {
         case .event(let eventCellViewModel):
             eventCellViewModel.didSelect()
         }
+    }
+    
+    // Metoda wywoływana podczas usuwania wybranego eventu
+    func deleteEvent(at indexPath: IndexPath) {
+        switch cells[indexPath.row] {
+        case .event(let eventCellViewModel):
+            eventService.deleteEvent(id: eventCellViewModel.event.objectID)
+        }
+        reload()
     }
 }

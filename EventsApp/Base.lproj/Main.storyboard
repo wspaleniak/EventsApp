@@ -82,20 +82,39 @@
                             <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="110" placeholderIntrinsicHeight="200" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Mfr-ly-7n3" customClass="TimeRemainingStackView" customModule="EventsApp" customModuleProvider="target">
                                 <rect key="frame" x="141.66666666666666" y="326" width="110" height="200"/>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yym-hb-eae">
+                                <rect key="frame" x="16" y="59" width="90" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f8N-hv-32i">
+                                <rect key="frame" x="156" y="576" width="81" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ptM-J1-wYG"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="yym-hb-eae" firstAttribute="top" secondItem="ptM-J1-wYG" secondAttribute="top" id="5MN-Uf-g3z"/>
                             <constraint firstItem="Mfr-ly-7n3" firstAttribute="centerY" secondItem="YkK-gg-efO" secondAttribute="centerY" id="5ZU-1h-cgW"/>
                             <constraint firstItem="Mfr-ly-7n3" firstAttribute="centerX" secondItem="YkK-gg-efO" secondAttribute="centerX" id="ABd-e3-I08"/>
                             <constraint firstItem="HBQ-zB-sfb" firstAttribute="top" secondItem="YkK-gg-efO" secondAttribute="top" id="Raw-0d-1ZX"/>
+                            <constraint firstItem="f8N-hv-32i" firstAttribute="centerX" secondItem="YkK-gg-efO" secondAttribute="centerX" id="ZGz-nc-YZj"/>
                             <constraint firstAttribute="bottom" secondItem="HBQ-zB-sfb" secondAttribute="bottom" id="bHR-Jh-Fgd"/>
                             <constraint firstItem="HBQ-zB-sfb" firstAttribute="leading" secondItem="YkK-gg-efO" secondAttribute="leading" id="bdl-eU-JCu"/>
+                            <constraint firstItem="yym-hb-eae" firstAttribute="leading" secondItem="ptM-J1-wYG" secondAttribute="leading" constant="16" id="cyO-50-JbC"/>
+                            <constraint firstItem="ptM-J1-wYG" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="yym-hb-eae" secondAttribute="trailing" constant="16" id="ntD-hp-FgM"/>
+                            <constraint firstItem="f8N-hv-32i" firstAttribute="top" secondItem="Mfr-ly-7n3" secondAttribute="bottom" constant="50" id="utB-nv-Zgh"/>
                             <constraint firstAttribute="trailing" secondItem="HBQ-zB-sfb" secondAttribute="trailing" id="zkX-bz-rYu"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="backgroundImageView" destination="HBQ-zB-sfb" id="BvX-h2-hcj"/>
+                        <outlet property="eventDateLbl" destination="f8N-hv-32i" id="twl-eU-hkb"/>
+                        <outlet property="eventNameLbl" destination="yym-hb-eae" id="9wd-vf-rW6"/>
                         <outlet property="timeRemainingStackView" destination="Mfr-ly-7n3" id="iEN-uL-QlP"/>
                     </connections>
                 </viewController>

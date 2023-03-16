@@ -26,6 +26,10 @@ final class TimeRemainingStackView: UIStackView {
             $0.text = ""
             $0.font = .systemFont(ofSize: viewModel.fontSize, weight: .medium)
             $0.textColor = .white
+            $0.layer.shadowColor = UIColor.black.cgColor
+            $0.layer.shadowOpacity = 0.7
+            $0.layer.shadowRadius = 4.0
+            $0.layer.shadowOffset = CGSize()
         }
         viewModel.timeRemainingParts.enumerated().forEach {
             timeRemainigLabels[$0.offset].text = $0.element
