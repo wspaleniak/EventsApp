@@ -1,20 +1,20 @@
 //
-//  AddEventViewController.swift
+//  EditEventViewController.swift
 //  EventsApp
 //
-//  Created by Wojciech Spaleniak on 25/02/2023.
+//  Created by Wojciech Spaleniak on 15/03/2023.
 //
 
 import UIKit
 
-// MARK: - Kontroler widoku dla AddEvent
-class AddEventViewController: UIViewController {
+// MARK: - Kontroler widoku dla EditEvent
+class EditEventViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
     // Definicja ViewModel dla zarządzania widokiem
     // ZAWSZE wszelkie dane do widoku przekazujemy poprzez ViewModel
-    var viewModel: AddEventViewModel?
+    var viewModel: EditEventViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,14 +48,11 @@ class AddEventViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneBtnTapped))
         navigationController?.navigationBar.tintColor = .black
         navigationController?.navigationBar.backgroundColor = .white
-        // Wymuszenie pokazywania się dużego tytułu bez przewijania strony
-        tableView.contentInsetAdjustmentBehavior = .never
-        tableView.setContentOffset(.init(x: 0, y: -1), animated: true)
     }
 }
 
 // MARK: - Ustawienie właściwości dla Table View
-extension AddEventViewController: UITableViewDataSource, UITableViewDelegate {
+extension EditEventViewController: UITableViewDataSource {
     // Użycie metody numberOfRows() z ViewModel
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel?.numberOfRows() ?? 0
@@ -74,8 +71,9 @@ extension AddEventViewController: UITableViewDataSource, UITableViewDelegate {
             return cell
         }
     }
-    
-    // Metoda wywoływana podczas kliknięcia w cellkę
+}
+
+extension EditEventViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel?.didSelectRow(at: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
@@ -83,7 +81,7 @@ extension AddEventViewController: UITableViewDataSource, UITableViewDelegate {
 }
 
 // MARK: - Delegat dla UITextField
-extension AddEventViewController: UITextFieldDelegate {
+extension EditEventViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let currentText = textField.text else { return false }
         let text = currentText + string

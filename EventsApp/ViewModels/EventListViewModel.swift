@@ -30,6 +30,7 @@ final class EventListViewModel {
     
     // Wykonywanie tej funkcji przypisujemy w kooordynatorze, gdy jego dziecko skończy działanie
     func reload() {
+        EventCellViewModel.imageCache.removeAllObjects()
         let events = coreDataManager.fetchEvents()
         cells = events.map {
             var eventCellViewModel = EventCellViewModel(event: $0)

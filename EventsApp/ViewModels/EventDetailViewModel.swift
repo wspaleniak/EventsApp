@@ -43,13 +43,22 @@ final class EventDetailViewModel {
     
     // Metoda wywoływana podczas ładowania widoku kontrolera
     func viewDidLoad() {
-        event = coreDataManager.getEvent(id: eventID)
-        onUpdate()
+        reload()
     }
     
     // Metoda wywoływana podczas kończenia widoku
     // Przekazuje działanie do kooordynatora
     func viewDidDisappear() {
         coordinator?.didFinish()
+    }
+    
+    func reload() {
+        event = coreDataManager.getEvent(id: eventID)
+        onUpdate()
+    }
+    
+    @objc func editButtonTapped() {
+        guard let event = event else { return }
+        coordinator?.onEditEvent(event: event)
     }
 }

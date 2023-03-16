@@ -9,6 +9,7 @@ import Foundation
 
 // MARK: - ViewModel zarządzający widokiem AddEvent
 final class AddEventViewModel {
+    
     enum Cell {
         case titleSubtitle(TitleSubtitleCellViewModel)
     }
@@ -26,12 +27,12 @@ final class AddEventViewModel {
     private let coreDataManager: CoreDataManager
     
     lazy var dateFormatter: DateFormatter = {
-        let dateformatter = DateFormatter()
-        dateformatter.dateFormat = "dd.MM.yyyy"
-        return dateformatter
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd.MM.yyyy"
+        return dateFormatter
     }()
     
-    init(cellBuilder: EventsCellBuilder, coreDataManager: CoreDataManager = CoreDataManager.shared) {
+    init(cellBuilder: EventsCellBuilder, coreDataManager: CoreDataManager = .shared) {
         self.cellBuilder = cellBuilder
         self.coreDataManager = coreDataManager
     }

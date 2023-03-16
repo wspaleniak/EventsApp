@@ -45,7 +45,7 @@ final class AddEventCoordinator: Coordinator {
     // Kończenie widoku gdy klikniemy przycisk 'Done' na widoku AddEvent
     // Metoda wywoływana w AddEventViewModel
     func didFinishSaveEvent() {
-        parentCoordinator?.onSaveEvent()
+        parentCoordinator?.onUpdateEvent()
         navigationController.dismiss(animated: true)
     }
     
@@ -55,15 +55,12 @@ final class AddEventCoordinator: Coordinator {
         self.completion = completion
         let imagePickerCoordinator = ImagePickerCoordinator(navigationController: modalNavigationController)
         imagePickerCoordinator.parentCoordinator = self
+        imagePickerCoordinator.onFinishPicking = { image in
+            completion(image)
+            self.modalNavigationController?.dismiss(animated: true)
+        }
         childCoordinators.append(imagePickerCoordinator)
         imagePickerCoordinator.start()
-    }
-    
-    // Kończenie widoku wybierania zdjęcia ImagePicker
-    // Wywołanie domknięcia które uaktualni UIImageView poprzez AddEventViewModel
-    func didFinishPicking(image: UIImage) {
-        completion(image)
-        modalNavigationController?.dismiss(animated: true)
     }
     
     // Usuwanie instancji widoku, gdy nie jest już używany (gdy widok zostaje zamknięty)

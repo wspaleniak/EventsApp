@@ -19,8 +19,10 @@ class EventDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupViews()
+        
         viewModel?.onUpdate = { [weak self] in
-            self?.setupViews()
+            self?.setupStackView()
             self?.backgroundImageView.image = self?.viewModel?.image
             self?.timeRemainingStackView.update()
             // event name label
@@ -36,8 +38,12 @@ class EventDetailViewController: UIViewController {
     }
 
     // Metoda wewnętrz której ustawiamy widok UIStackView oraz przypisujemy mu wybrany ViewModel, który nim zarządza
-    func setupViews() {
+    func setupStackView() {
         timeRemainingStackView.setup()
         self.timeRemainingStackView.viewModel = self.viewModel?.timeRemainingViewModel
+    }
+    
+    func setupViews() {
+        navigationItem.rightBarButtonItem = .init(image: UIImage(systemName: "pencil"), style: .plain, target: viewModel, action: #selector(viewModel?.editButtonTapped))
     }
 }

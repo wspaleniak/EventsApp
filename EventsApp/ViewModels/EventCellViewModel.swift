@@ -15,7 +15,7 @@ struct EventCellViewModel {
     private let imageQueue = DispatchQueue(label: "imageQueue", qos: .background)
     
     // przechowywanie obrazów z CoreData dla szybszego ładowania
-    private static let imageCache = NSCache<NSString, UIImage>()
+    static let imageCache = NSCache<NSString, UIImage>()
     private var cacheKey: String {
         return event.objectID.description
     }

@@ -28,12 +28,27 @@ final class CoreDataManager {
         return persistentContainer.viewContext
     }
     
-    // Metoda do zapisywania elementów do bazy danych
+    // Metoda do zapisywania nowych elementów do bazy danych
     func saveEvent(name: String, date: Date, image: UIImage) {
         let event = Event(context: managedObjectContext)
         event.setValue(name, forKey: "name")
         event.setValue(date, forKey: "date")
         // zmniejszenie wielkości zapisywanego zdjęcia
+        let resizedImage = image.sameAspectRatio(newHeight: 250)
+        let imageData = resizedImage.jpegData(compressionQuality: 0.5)
+        event.setValue(imageData, forKey: "image")
+        
+        do {
+            try managedObjectContext.save()
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    // Metoda do aktualizowanie istniejących elementów w bazie danych
+    func updateEvent(event: Event, name: String, date: Date, image: UIImage) {
+        event.setValue(name, forKey: "name")
+        event.setValue(date, forKey: "date")
         let resizedImage = image.sameAspectRatio(newHeight: 250)
         let imageData = resizedImage.jpegData(compressionQuality: 0.5)
         event.setValue(imageData, forKey: "image")

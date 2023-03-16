@@ -11,6 +11,12 @@ import UIKit
 protocol Coordinator: AnyObject {
     var childCoordinators: [Coordinator] { get }
     func start()
+    func childDidFinish(childCoordinator: Coordinator)
+}
+
+extension Coordinator {
+    // Usuwanie instancji widoku, gdy nie jest już używany (gdy widok zostaje zamknięty)
+    func childDidFinish(childCoordinator: Coordinator) {}
 }
 
 // MARK: - Główny koordynator aplikacji
